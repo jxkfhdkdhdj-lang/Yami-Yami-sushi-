@@ -7,6 +7,67 @@
 <meta name="theme-color" content="#080b09">
 <title>Yami Yami Sushi | يامي يامي سوشي</title>
 
+.poster-menu {
+  padding: 25px 5%;
+  text-align: center;
+}
+.poster-menu h2 {
+  color: #20df70;
+  margin-bottom: 20px;
+}
+.poster-wrap {
+  position: relative;
+  max-width: 650px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 2px solid #29352e;
+  background: #141a16;
+}
+.poster-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.poster-add {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #20df70;
+  color: #080b09;
+  border: 2px solid white;
+  border-radius: 15px;
+  padding: 15px 22px;
+  font-size: 17px;
+  font-weight: 900;
+  box-shadow: 0 4px 25px #000b;
+}
+.box-picker {
+  max-width: 650px;
+  margin: 15px auto;
+  padding: 15px;
+  background: #141a16;
+  border: 1px solid #29352e;
+  border-radius: 16px;
+}
+.box-picker h3 {
+  color: #20df70;
+}
+.box-picker button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #20df70;
+  background: #080b09;
+  color: white;
+}
+.box-picker .close-picker {
+  background: #29352e;
+}
+  
 <style>
 :root {
   --green: #20df70;
@@ -315,6 +376,46 @@ footer {
 >
   </section>
 
+<section class="poster-menu" id="special-menu">
+  <h2>🍣 اختر وجبتك من المنيو</h2>
+
+  <div class="poster-wrap">
+    <img
+      class="poster-image"
+      src="./ضع-اسم-الصورة-هنا.jpg"
+      alt="منيو Yami Yami Sushi الأصلي"
+    >
+
+    <button class="poster-add" onclick="openBoxPicker()">
+      🛒 اختر وجبتك
+    </button>
+  </div>
+
+  <div id="boxPicker" class="box-picker" hidden>
+    <h3>اختر الوجبة التي تريدها</h3>
+
+    <button onclick="chooseBox(7)">
+      Maki Box · 24 قطعة — 110 DH
+    </button>
+
+    <button onclick="chooseBox(8)">
+      Aromaki Box · 24 قطعة — 160 DH
+    </button>
+
+    <button onclick="chooseBox(9)">
+      Crispy Box · 12 قطعة — 90 DH
+    </button>
+
+    <button onclick="chooseBox(10)">
+      California Box · 16 قطعة — 110 DH
+    </button>
+
+    <button class="close-picker" onclick="closeBoxPicker()">
+      إغلاق ✕
+    </button>
+  </div>
+</section>
+  
   <section id="menu">
     <div class="section-title">
       <h2>🍣 قائمة الطعام</h2>
@@ -406,7 +507,42 @@ const menu = [
     description: "تشكيلة سوشي خاصة",
     image: "https://images.unsplash.com/photo-1563612116625-3012372fccce?auto=format&fit=crop&w=700&q=80",
     menuImage: ""
-  }
+  }{
+  id: 7,
+  name: "Maki Box 24pcs",
+  category: "Boxes",
+  price: 110,
+  description: "Maki concombre, avocat, crevette, saumon",
+  image: "./اسم-الصورة-الحقيقي.jpg",
+  menuImage: ""
+},
+{
+  id: 8,
+  name: "Aromaki Box 24pcs",
+  category: "Boxes",
+  price: 160,
+  description: "Aromaki saumon, crevette, végétarien, poulet",
+  image: "./اسم-الصورة-الحقيقي.jpg",
+  menuImage: ""
+},
+{
+  id: 9,
+  name: "Crispy Box 12pcs",
+  category: "Boxes",
+  price: 90,
+  description: "Fry eby fry, Aromaki bowlé, Crunchy",
+  image: "./اسم-الصورة-الحقيقي.jpg",
+  menuImage: ""
+},
+{
+  id: 10,
+  name: "California Box 16pcs",
+  category: "Boxes",
+  price: 110,
+  description: "California cheese, Classique, Tigre roll, Poulet roll",
+  image: "./اسم-الصورة-الحقيقي.jpg",
+  menuImage: ""
+  },
 ];
 
 let cart = [];
@@ -542,6 +678,24 @@ function sendOrder() {
   window.location.href = url;
 }
 
+function openBoxPicker() {
+  document.getElementById("boxPicker").hidden = false;
+  document.getElementById("boxPicker").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+function closeBoxPicker() {
+  document.getElementById("boxPicker").hidden = true;
+}
+
+function chooseBox(id) {
+  addToCart(id);
+  closeBoxPicker();
+  goCart();
+  }
+  
 renderCategories();
 renderMenu();
 renderCart();
