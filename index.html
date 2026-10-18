@@ -2,45 +2,579 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yami Yami Sushi</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yami Yami Sushi</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background: #020804;
-      font-family: Arial, sans-serif;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      min-height: 100vh;
-      background: #020804;
-    }
-
-    .menu-image {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-  </style>
+<style>
+:root {
+  --green:#39ff70;
+  --green2:#a5ff68;
+  --black:#020603;
+  --panel:#09130b;
+  --text:#f5fff5;
+  --muted:#b9c7bb;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--black);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
+button { font:inherit; cursor:pointer; }
+header {
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#030804f5;
+  border-bottom:1px solid #164b24;
+  padding:13px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo {
+  width:48px;
+  height:48px;
+  border:2px solid var(--green);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  font-size:25px;
+}
+.brand h2 {
+  margin:0;
+  color:var(--green);
+  font-size:20px;
+}
+.brand small { color:var(--muted); }
+.cart-top,.back-btn {
+  background:#0c170d;
+  color:var(--green2);
+  border:1px solid #28552d;
+  border-radius:30px;
+  padding:12px;
+}
+.hero {
+  padding:40px 18px 30px;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at top,#123018 0%,#061008 55%,#020603 100%);
+}
+.tag {
+  display:inline-block;
+  color:var(--green2);
+  border:1px solid #29482c;
+  border-radius:30px;
+  padding:9px 15px;
+}
+.hero h1 {
+  font-size:clamp(30px,7vw,48px);
+  line-height:1.45;
+  margin:24px 0 12px;
+}
+.hero h1 span { color:var(--green2); }
+.hero p {
+  color:var(--muted);
+  line-height:1.9;
+  font-size:16px;
+  margin:0 auto;
+  max-width:500px;
+}
+.categories {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:15px;
+  padding:18px;
+  max-width:700px;
+  margin:auto;
+}
+.category {
+  background:linear-gradient(145deg,#0b1a0d,#020603);
+  border:2px solid #24b84c;
+  border-radius:26px;
+  padding:10px;
+  color:white;
+  overflow:hidden;
+  transition:.2s;
+}
+.category:active { transform:scale(.97); }
+.category img {
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:18px;
+}
+.category strong {
+  display:block;
+  color:var(--green);
+  font-size:23px;
+  margin:10px 0 4px;
+}
+.category span { font-size:17px; }
+.section-title {
+  color:var(--green);
+  text-align:center;
+  font-size:28px;
+  margin:25px 0 5px;
+}
+.subtitle {
+  text-align:center;
+  color:var(--muted);
+  margin:10px 12px 22px;
+}
+.products {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  padding:12px;
+  max-width:850px;
+  margin:auto;
+}
+.product {
+  min-width:0;
+  border:1px solid #20d950;
+  border-radius:17px;
+  overflow:hidden;
+  background:linear-gradient(#0b160d,#020603);
+  text-align:center;
+  padding-bottom:12px;
+}
+.product img {
+  display:block;
+  width:100%;
+  height:145px;
+  object-fit:cover;
+}
+.product h3 {
+  font-size:16px;
+  margin:10px 3px 5px;
+}
+.ingredients {
+  color:#c2d0c4;
+  font-size:12px;
+  line-height:1.6;
+  min-height:38px;
+  padding:0 5px;
+}
+.price {
+  display:inline-block;
+  background:var(--green);
+  color:#001a06;
+  font-weight:bold;
+  padding:6px 20px;
+  border-radius:25px;
+  margin:8px 0;
+}
+.quantity {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:17px;
+  margin:4px 0 10px;
+}
+.quantity button {
+  background:#07140a;
+  border:1px solid var(--green);
+  color:var(--green);
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  font-size:20px;
+}
+.add-btn,.main-btn {
+  border:0;
+  background:var(--green);
+  color:#001a06;
+  font-weight:bold;
+  border-radius:30px;
+  padding:12px 8px;
+}
+.add-btn { width:90%; font-size:13px; }
+.main-btn { width:100%; margin-top:12px; }
+.screen {
+  display:none;
+  padding-bottom:100px;
+}
+.screen.active { display:block; }
+.home-screen { padding-bottom:100px; }
+.cart-screen { padding:20px 15px; }
+.cart-item {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid #203b24;
+}
+.cart-item small { color:var(--muted); }
+.remove-btn {
+  border:1px solid #754040;
+  color:#ffaaaa;
+  background:#1b0909;
+  border-radius:9px;
+  padding:7px;
+}
+.total {
+  display:flex;
+  justify-content:space-between;
+  margin-top:25px;
+  font-size:22px;
+  font-weight:bold;
+}
+.whatsapp {
+  background:#25d366;
+  color:#001a06;
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:16px;
+  font-weight:bold;
+  margin-top:20px;
+}
+.bottom-nav {
+  position:fixed;
+  z-index:20;
+  bottom:0;
+  left:0;
+  right:0;
+  display:flex;
+  justify-content:space-around;
+  background:#030804f5;
+  border-top:1px solid #21502a;
+  padding:10px 5px max(10px,env(safe-area-inset-bottom));
+}
+.bottom-nav button {
+  color:#b9c7bb;
+  background:none;
+  border:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  font-size:12px;
+}
+.bottom-nav button span { font-size:22px; }
+.bottom-nav button.selected { color:var(--green); }
+.empty {
+  text-align:center;
+  color:var(--muted);
+  padding:35px 10px;
+}
+footer {
+  text-align:center;
+  padding:25px 10px 110px;
+  color:var(--green);
+  font-size:13px;
+}
+@media(min-width:650px) {
+  .products { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .product img { height:190px; }
+  .categories { max-width:600px; }
+}
+</style>
 </head>
 
 <body>
-  <main class="page">
-    <img
-      class="menu-image"
-      src="yami-home.png"
-      alt="واجهة مطعم Yami Yami Sushi"
-    >
-  </main>
+
+<header>
+  <button class="cart-top" onclick="showScreen('cart')">
+    🛒 <span id="cart-count">0</span> السلة
+  </button>
+  <div class="brand">
+    <div class="logo">鳥</div>
+    <div>
+      <h2>Yami Yami Sushi</h2>
+      <small>طازج . لذيذ . ياباني</small>
+    </div>
+  </div>
+</header>
+
+<!-- الصفحة الرئيسية -->
+<main id="home" class="screen home-screen active">
+  <section class="hero">
+    <div class="tag">🟢 نكهة يابانية تصل إلى بابك</div>
+    <h1>لحظتك اللذيذة تبدأ<br>من <span>Yami Yami</span></h1>
+    <p>
+      اختر وجبتك المفضلة، أضفها إلى السلة،
+      وأرسل طلبك بسهولة. سوشي طازج ومذاق لا يُنسى.
+    </p>
+  </section>
+
+  <h2 class="section-title">اكتشف قائمتنا</h2>
+  <p class="subtitle">اختر القسم الذي تريد استكشافه</p>
+
+  <section class="categories">
+    <button class="category" onclick="openCategory('maki')">
+      <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=600&q=85"
+           alt="Makis">
+      <strong>Makis</strong>
+      <span>الماكي 🍣</span>
+    </button>
+
+    <button class="category" onclick="openCategory('foto')">
+      <img src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=600&q=85"
+           alt="Fotomakis">
+      <strong>Fotomakis</strong>
+      <span>فوتوماكي 🍱</span>
+    </button>
+  </section>
+</main>
+
+<!-- قسم الوجبات -->
+<section id="menu" class="screen">
+  <button class="back-btn" style="margin:15px" onclick="showScreen('home')">
+    ← العودة للرئيسية
+  </button>
+  <h2 id="menu-title" class="section-title">Makis</h2>
+  <p id="menu-subtitle" class="subtitle"></p>
+  <div id="products" class="products"></div>
+</section>
+
+<!-- السلة -->
+<section id="cart" class="screen cart-screen">
+  <h2 class="section-title">🛒 سلة الطلبات</h2>
+  <p class="subtitle">راجع وجباتك قبل الإرسال</p>
+  <div id="cart-items"></div>
+  <div class="total">
+    <span>المجموع</span>
+    <span id="total">0 DH</span>
+  </div>
+  <button class="whatsapp" onclick="sendOrder()">
+    🟢 إرسال الطلب عبر واتساب
+  </button>
+  <p class="subtitle">سيتم فتح واتساب لمراجعة الطلب وإرساله.</p>
+</section>
+
+<footer>
+  Yami Yami Sushi 🍣<br>
+  Sushi • Fraîcheur • Qualité
+</footer>
+
+<nav class="bottom-nav">
+  <button id="nav-home" class="selected" onclick="showScreen('home')">
+    <span>⌂</span>الرئيسية
+  </button>
+  <button id="nav-menu" onclick="showScreen('menu')">
+    <span>🍣</span>قائمة الطعام
+  </button>
+  <button id="nav-cart" onclick="showScreen('cart')">
+    <span>🛒</span>السلة
+  </button>
+</nav>
+
+<script>
+const dishes = {
+  maki: [
+    {name:"Maki concombre", ar:"ماكي الخيار", ingredients:"الخيار والأرز وأعشاب النوري", price:15},
+    {name:"Maki surimi", ar:"ماكي سوريمي", ingredients:"السوريمي والأرز والنوري", price:25},
+    {name:"Maki avocat", ar:"ماكي الأفوكادو", ingredients:"الأفوكادو والأرز والنوري", price:25},
+    {name:"Maki crevette", ar:"ماكي القمرون", ingredients:"القمرون والأرز والنوري", price:30},
+    {name:"Maki saumon", ar:"ماكي السلمون", ingredients:"السلمون والأرز والنوري", price:35},
+    {name:"Maki mangue", ar:"ماكي المانجو", ingredients:"المانجو والأرز والنوري", price:25},
+    {name:"Maki cheese", ar:"ماكي الجبن", ingredients:"الجبن والأرز والنوري", price:25},
+    {name:"Maki poulet", ar:"ماكي الدجاج", ingredients:"الدجاج والأرز والنوري", price:20}
+  ],
+  foto: [
+    {name:"Fotomaki Saumon", ar:"فوتوماكي السلمون", ingredients:"الجبن، السلمون، الأفوكادو، المانجو", price:45},
+    {name:"Fotomaki Crevette", ar:"فوتوماكي القمرون", ingredients:"قمرون تمبورا، أفوكادو، سوريمي، ماساغو", price:45},
+    {name:"Fotomaki Végétarien", ar:"فوتوماكي نباتي", ingredients:"المانجو، الخيار، الأفوكادو، السلطة، السمسم", price:35},
+    {name:"Fotomaki Poulet", ar:"فوتوماكي الدجاج", ingredients:"الجبن، الدجاج، السلطة، الصلصة الحارة", price:35}
+  ]
+};
+
+const sushiImages = [
+  "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=600&q=85",
+  "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=600&q=85",
+  "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=85"
+];
+
+let cart = {};
+let quantities = {};
+let currentCategory = "maki";
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(el => {
+    el.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".bottom-nav button").forEach(el => {
+    el.classList.remove("selected");
+  });
+
+  const nav = {
+    home:"nav-home",
+    menu:"nav-menu",
+    cart:"nav-cart"
+  };
+  document.getElementById(nav[id]).classList.add("selected");
+
+  if (id === "cart") renderCart();
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+function openCategory(category) {
+  currentCategory = category;
+  const items = dishes[category];
+
+  document.getElementById("menu-title").textContent =
+    category === "maki" ? "Makis 🍣" : "Fotomakis 🍱";
+
+  document.getElementById("menu-subtitle").textContent =
+    category === "maki"
+      ? "اكتشف جميع أنواع الماكي وأسعارها"
+      : "اكتشف جميع أنواع الفوتوماكي ومكوناتها";
+
+  const container = document.getElementById("products");
+  container.innerHTML = "";
+
+  items.forEach((item, index) => {
+    const id = category + "-" + index;
+    if (!quantities[id]) quantities[id] = 1;
+
+    const card = document.createElement("article");
+    card.className = "product";
+    card.innerHTML = `
+      <img src="${sushiImages[index % sushiImages.length]}"
+           alt="${item.name}" loading="lazy">
+      <h3>${item.name}</h3>
+      <div>${item.ar}</div>
+      <p class="ingredients">${item.ingredients}</p>
+      <div class="price">${item.price} DH</div>
+      <div class="quantity">
+        <button onclick="changeQty('${id}',-1)">−</button>
+        <strong id="qty-${id}">${quantities[id]}</strong>
+        <button onclick="changeQty('${id}',1)">+</button>
+      </div>
+      <button class="add-btn" onclick="addToCart('${id}')">
+        🛒 أضف إلى السلة
+      </button>
+    `;
+    container.appendChild(card);
+  });
+
+  showScreen("menu");
+}
+
+function findDish(id) {
+  const [category, index] = id.split("-");
+  return dishes[category][Number(index)];
+}
+
+function changeQty(id, amount) {
+  quantities[id] = Math.max(1, (quantities[id] || 1) + amount);
+  const el = document.getElementById("qty-" + id);
+  if (el) el.textContent = quantities[id];
+}
+
+function addToCart(id) {
+  const dish = findDish(id);
+  if (!cart[id]) {
+    cart[id] = {...dish, qty:0};
+  }
+  cart[id].qty += quantities[id];
+  updateCartCount();
+
+  const btn = document.querySelector(
+    `button[onclick="addToCart('${id}')"]`
+  );
+  if (btn) {
+    btn.textContent = "✓ تمت الإضافة";
+    setTimeout(() => {
+      btn.textContent = "🛒 أضف إلى السلة";
+    }, 900);
+  }
+}
+
+function updateCartCount() {
+  const count = Object.values(cart).reduce((sum,item) => sum + item.qty, 0);
+  document.getElementById("cart-count").textContent = count;
+}
+
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  container.innerHTML = "";
+  let total = 0;
+  const entries = Object.entries(cart);
+
+  if (!entries.length) {
+    container.innerHTML = '<div class="empty">السلة فارغة 🍣<br>اختر وجباتك من القائمة.</div>';
+  }
+
+  entries.forEach(([id,item]) => {
+    total += item.price * item.qty;
+
+    const row = document.createElement("div");
+    row.className = "cart-item";
+
+    const info = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = item.name;
+    const details = document.createElement("small");
+    details.textContent = ` — ${item.qty} × ${item.price} DH`;
+    info.append(title, details);
+
+    const actions = document.createElement("div");
+    actions.style.display = "flex";
+    actions.style.alignItems = "center";
+    actions.style.gap = "8px";
+
+    const subtotal = document.createElement("strong");
+    subtotal.textContent = (item.qty * item.price) + " DH";
+
+    const remove = document.createElement("button");
+    remove.className = "remove-btn";
+    remove.textContent = "حذف";
+    remove.onclick = () => {
+      delete cart[id];
+      updateCartCount();
+      renderCart();
+    };
+
+    actions.append(subtotal, remove);
+    row.append(info, actions);
+    container.appendChild(row);
+  });
+
+  document.getElementById("total").textContent = total + " DH";
+}
+
+function sendOrder() {
+  const entries = Object.values(cart);
+
+  if (!entries.length) {
+    alert("السلة فارغة! أضف وجبة أولاً.");
+    return;
+  }
+
+  let total = 0;
+  let message = "🍣 *طلب جديد - Yami Yami Sushi*%0A%0A";
+
+  entries.forEach(item => {
+    const subtotal = item.qty * item.price;
+    total += subtotal;
+    message += "• " + item.name + " (" + item.ar + ")"
+      + "%0A  الكمية: " + item.qty
+      + "%0A  الثمن: " + subtotal + " DH%0A%0A";
+  });
+
+  message += "💰 *المجموع: " + total + " DH*";
+
+  const phone = "212688741156";
+  const url = "https://wa.me/" + phone + "?text=" + message;
+  window.location.href = url;
+}
+</script>
+
 </body>
-</html>
+    </html>
+    
