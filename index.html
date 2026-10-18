@@ -1,705 +1,286 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b09">
-<title>Yami Yami Sushi | يامي يامي سوشي</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b0f0d" />
+  <meta name="description" content="Yami Yami Sushi - اطلب السوشي المفضل لديك بسهولة" />
+  <title>Yami Yami Sushi | اطلب الآن</title>
+  <style>
+    :root {
+      --bg: #080b09;
+      --surface: #111713;
+      --surface-2: #172019;
+      --surface-3: #202b21;
+      --line: rgba(193, 255, 137, 0.15);
+      --text: #f7faf4;
+      --muted: #a3afa3;
+      --green: #b9f36f;
+      --green-2: #75d27a;
+      --green-dark: #294a2c;
+      --orange: #ffb45c;
+      --danger: #ff7d7d;
+      --shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --radius-sm: 13px;
+    }
 
-.poster-menu {
-  padding: 25px 5%;
-  text-align: center;
-}
-.poster-menu h2 {
-  color: #20df70;
-  margin-bottom: 20px;
-}
-.poster-wrap {
-  position: relative;
-  max-width: 650px;
-  margin: auto;
-  overflow: hidden;
-  border-radius: 20px;
-  border: 2px solid #29352e;
-  background: #141a16;
-}
-.poster-image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.poster-add {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #20df70;
-  color: #080b09;
-  border: 2px solid white;
-  border-radius: 15px;
-  padding: 15px 22px;
-  font-size: 17px;
-  font-weight: 900;
-  box-shadow: 0 4px 25px #000b;
-}
-.box-picker {
-  max-width: 650px;
-  margin: 15px auto;
-  padding: 15px;
-  background: #141a16;
-  border: 1px solid #29352e;
-  border-radius: 16px;
-}
-.box-picker h3 {
-  color: #20df70;
-}
-.box-picker button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 14px;
-  border-radius: 10px;
-  border: 1px solid #20df70;
-  background: #080b09;
-  color: white;
-}
-.box-picker .close-picker {
-  background: #29352e;
-}
-  
-<style>
-:root {
-  --green: #20df70;
-  --black: #080b09;
-  --panel: #141a16;
-  --muted: #aab4ad;
-  --border: #29352e;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--black);
-  color: #f5f7f5;
-  font-family: Arial, Tahoma, sans-serif;
-}
-button { font: inherit; cursor: pointer; }
-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 5%;
-  background: rgba(8,11,9,.96);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 23px;
-  font-weight: 900;
-}
-.logo-icon {
-  background: var(--green);
-  color: #071009;
-  border-radius: 13px;
-  padding: 8px 12px;
-}
-.green { color: var(--green); }
-.cart-button {
-  background: var(--panel);
-  color: white;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 11px 15px;
-}
-.count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--green);
-  color: #071009;
-  font-weight: bold;
-  min-width: 26px;
-  height: 26px;
-  border-radius: 20px;
-  margin-right: 6px;
-}
-.hero {
-  padding: 45px 5% 30px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
-  align-items: center;
-}
-.eyebrow {
-  color: var(--green);
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-h1 { font-size: clamp(32px, 5vw, 54px); margin: 15px 0; }
-.hero p { color: var(--muted); line-height: 1.9; font-size: 17px; }
-.hero img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 24px;
-  border: 1px solid var(--border);
-}
-.primary {
-  display: inline-block;
-  background: var(--green);
-  color: #071009;
-  border: 0;
-  border-radius: 13px;
-  padding: 14px 20px;
-  font-weight: 800;
-  text-decoration: none;
-}
-section { padding: 25px 5%; }
-.section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.section-title h2 { margin: 0 0 18px; }
-.categories {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 10px 0 18px;
-}
-.category {
-  white-space: nowrap;
-  padding: 10px 16px;
-  color: white;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 30px;
-}
-.category.active {
-  color: #071009;
-  background: var(--green);
-  border-color: var(--green);
-}
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 17px;
-}
-.food-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 19px;
-  overflow: hidden;
-  min-width: 0;
-}
-.food-card img {
-  display: block;
-  width: 100%;
-  height: 175px;
-  object-fit: cover;
-  background: #202820;
-}
-.food-info { padding: 13px; }
-.food-info h3 { margin: 0 0 8px; font-size: 17px; }
-.food-info p {
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-  min-height: 38px;
-  margin: 0 0 10px;
-}
-.food-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-.price { color: var(--green); font-weight: 900; white-space: nowrap; }
-.add {
-  border: 0;
-  background: var(--green);
-  color: #071009;
-  border-radius: 10px;
-  padding: 10px 12px;
-  font-weight: bold;
-}
-.menu-link {
-  display: block;
-  color: var(--green);
-  font-size: 12px;
-  margin-top: 10px;
-  text-decoration: underline;
-}
-#cart {
-  scroll-margin-top: 85px;
-  padding-bottom: 100px;
-}
-.cart-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 17px;
-}
-.cart-row {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  padding: 13px 0;
-  border-bottom: 1px solid var(--border);
-}
-.cart-row img {
-  width: 66px;
-  height: 66px;
-  border-radius: 12px;
-  object-fit: cover;
-}
-.cart-description { flex: 1; min-width: 0; }
-.cart-description strong { display: block; margin-bottom: 7px; }
-.qty { display: flex; align-items: center; gap: 10px; }
-.qty button {
-  width: 29px;
-  height: 29px;
-  background: #26342b;
-  color: var(--green);
-  border: 0;
-  border-radius: 8px;
-}
-.remove {
-  color: #ff8585;
-  background: none;
-  border: 0;
-  margin-top: 6px;
-  font-size: 12px;
-}
-.total-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 21px;
-  font-weight: bold;
-  margin: 20px 0;
-}
-.whatsapp {
-  display: block;
-  width: 100%;
-  background: #25d366;
-  color: #06220f;
-  font-size: 17px;
-  font-weight: 900;
-  text-align: center;
-  text-decoration: none;
-  padding: 15px;
-  border-radius: 12px;
-  border: 0;
-}
-.note { color: var(--muted); font-size: 12px; line-height: 1.7; }
-.empty { color: var(--muted); padding: 20px 0; }
-footer {
-  padding: 25px;
-  text-align: center;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-}
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 20;
-  display: flex;
-  justify-content: space-around;
-  background: #101511;
-  border-top: 1px solid var(--border);
-  padding: 10px 5px calc(10px + env(safe-area-inset-bottom));
-}
-.bottom-nav a {
-  color: var(--muted);
-  text-decoration: none;
-  text-align: center;
-  font-size: 12px;
-  display: grid;
-  gap: 4px;
-}
-.bottom-nav span { font-size: 22px; }
-.bottom-nav a:hover { color: var(--green); }
-@media (max-width: 700px) {
-  .hero { grid-template-columns: 1fr; padding-top: 28px; }
-  .hero img { height: 230px; }
-  .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
-  .food-card img { height: 135px; }
-  .food-info { padding: 10px; }
-  .food-info h3 { font-size: 15px; }
-  .food-info p { font-size: 12px; }
-  .add { padding: 9px; font-size: 12px; }
-}
-@media (max-width: 360px) {
-  .menu-grid { grid-template-columns: 1fr; }
-  .food-card img { height: 200px; }
-}
-</style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(185, 243, 111, 0.08), transparent 32rem),
+        radial-gradient(circle at 0% 50%, rgba(117, 210, 122, 0.07), transparent 28rem),
+        var(--bg);
+      font-family: Tahoma, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 11, 9, 0.84);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(18px);
+    }
+    .topbar-inner {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border-radius: 14px;
+      background: var(--green);
+      color: var(--bg);
+      box-shadow: 0 8px 26px rgba(185, 243, 111, 0.18);
+    }
+    .brand-mark svg { width: 25px; height: 25px; }
+    .brand-copy { display: grid; gap: 0; line-height: 1.1; }
+    .brand-copy strong { font-size: 17px; letter-spacing: .02em; }
+    .brand-copy span { color: var(--muted); font-size: 11px; margin-top: 4px; }
+    .nav { display: flex; align-items: center; gap: 25px; color: var(--muted); font-size: 14px; }
+    .nav a:hover { color: var(--green); }
+    .cart-button {
+      display: inline-flex; align-items: center; gap: 9px;
+      border: 1px solid var(--line); border-radius: 999px;
+      padding: 10px 15px; color: var(--text); background: rgba(255,255,255,0.04);
+      transition: .2s ease;
+    }
+    .cart-button:hover { border-color: var(--green); transform: translateY(-1px); }
+    .cart-button svg { width: 19px; height: 19px; color: var(--green); }
+    .cart-count {
+      min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center;
+      border-radius: 99px; color: var(--bg); background: var(--green); font-size: 12px; font-weight: 800;
+    }
+
+    .hero { padding: 74px 0 46px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 50px; align-items: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px;
+      color: var(--green); border: 1px solid var(--line); border-radius: 999px;
+      background: rgba(185, 243, 111, 0.05); font-size: 12px; font-weight: bold;
+    }
+    .eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 5px rgba(185,243,111,.1); }
+    h1 { margin: 18px 0 16px; max-width: 670px; font-size: clamp(37px, 6vw, 68px); line-height: 1.1; letter-spacing: -0.05em; }
+    h1 span { color: var(--green); }
+    .hero p { max-width: 560px; color: var(--muted); font-size: 17px; margin: 0 0 28px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .primary-btn, .secondary-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 48px; border-radius: 14px; padding: 0 20px; font-weight: bold; transition: .2s ease;
+    }
+    .primary-btn { color: var(--bg); background: var(--green); border: 1px solid var(--green); }
+    .primary-btn:hover { background: #d2ff91; transform: translateY(-2px); }
+    .secondary-btn { color: var(--text); background: transparent; border: 1px solid var(--line); }
+    .secondary-btn:hover { border-color: var(--green); color: var(--green); }
+    .primary-btn svg, .secondary-btn svg { width: 18px; height: 18px; }
+    .hero-visual { position: relative; min-height: 360px; display: grid; place-items: center; }
+    .hero-orbit { position: absolute; width: 310px; height: 310px; border: 1px solid rgba(185,243,111,.18); border-radius: 50%; }
+    .hero-orbit::before, .hero-orbit::after { content: ''; position: absolute; border-radius: 50%; background: var(--green); }
+    .hero-orbit::before { width: 9px; height: 9px; top: 22px; left: 45px; box-shadow: 0 0 0 8px rgba(185,243,111,.08); }
+    .hero-orbit::after { width: 6px; height: 6px; bottom: 54px; right: 18px; background: var(--orange); }
+    .sushi-plate { position: relative; width: 255px; height: 255px; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 45% 35%, #314d34 0 5%, #19271b 40%, #0d130f 72%); border: 10px solid #131a14; box-shadow: var(--shadow), 0 0 0 1px rgba(185,243,111,.18); transform: rotate(-8deg); }
+    .sushi-plate::before { content: ''; position: absolute; inset: 24px; border: 1px dashed rgba(185,243,111,.18); border-radius: 50%; }
+    .sushi-piece { position: absolute; display: grid; place-items: center; width: 62px; height: 48px; border-radius: 20px; font-size: 27px; background: #273c27; box-shadow: 0 7px 16px rgba(0,0,0,.3); }
+    .sushi-piece:nth-child(1) { top: 40px; right: 54px; transform: rotate(18deg); }
+    .sushi-piece:nth-child(2) { top: 76px; left: 37px; transform: rotate(-18deg); }
+    .sushi-piece:nth-child(3) { bottom: 45px; right: 42px; transform: rotate(-11deg); }
+    .sushi-piece:nth-child(4) { bottom: 54px; left: 60px; transform: rotate(20deg); }
+    .plate-center { width: 90px; height: 90px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: #152018; font-size: 39px; transform: rotate(8deg); box-shadow: 0 10px 28px rgba(185,243,111,.22); }
+
+    .section { padding: 48px 0 84px; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 23px; }
+    .section-heading h2 { margin: 0; font-size: 30px; letter-spacing: -.04em; }
+    .section-heading p { color: var(--muted); font-size: 13px; margin: 5px 0 0; }
+    .categories { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 25px; }
+    .category {
+      border: 1px solid var(--line); color: var(--muted); background: transparent;
+      border-radius: 999px; padding: 9px 15px; font-size: 13px; transition: .2s ease;
+    }
+    .category:hover, .category.active { color: var(--bg); background: var(--green); border-color: var(--green); }
+    .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .food-card {
+      position: relative; min-height: 326px; display: flex; flex-direction: column;
+      overflow: hidden; border: 1px solid rgba(255,255,255,.07); border-radius: var(--radius-md);
+      background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+      transition: .22s ease;
+    }
+    .food-card:hover { transform: translateY(-4px); border-color: rgba(185,243,111,.34); box-shadow: 0 16px 42px rgba(0,0,0,.22); }
+    .food-art { position: relative; min-height: 151px; display: grid; place-items: center; overflow: hidden; background: radial-gradient(circle at 50% 20%, #2b4c2b, #162119 66%); }
+    .food-art::after { content: ''; position: absolute; width: 126px; height: 30px; border-radius: 50%; background: rgba(0,0,0,.22); bottom: 23px; filter: blur(7px); }
+    .food-image { position: relative; z-index: 1; width: 122px; height: 122px; object-fit: cover; border-radius: 29px; border: 1px solid rgba(185,243,111,.34); box-shadow: 0 14px 22px rgba(0,0,0,.32); transform: rotate(-2deg); }
+    .food-badge { position: absolute; top: 12px; right: 12px; z-index: 2; padding: 5px 9px; border-radius: 99px; color: #152018; background: var(--green); font-size: 10px; font-weight: 800; }
+    .food-content { display: flex; flex: 1; flex-direction: column; padding: 17px; }
+    .food-content h3 { margin: 0 0 5px; font-size: 17px; }
+    .food-content p { min-height: 44px; color: var(--muted); font-size: 12px; margin: 0 0 15px; }
+    .food-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; }
+    .price { display: inline-flex; align-items: center; gap: 6px; color: var(--green); font-weight: 800; font-size: 15px; }
+    .price svg { width: 16px; height: 16px; }
+    .add-btn { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; color: var(--bg); background: var(--green); transition: .2s ease; }
+    .add-btn:hover { background: #d2ff91; transform: scale(1.07); }
+    .add-btn svg { width: 19px; height: 19px; }
+    .empty { grid-column: 1/-1; padding: 40px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: var(--radius-md); }
+
+    .info-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+    .info-card { display: flex; align-items: center; gap: 12px; padding: 17px; border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius-sm); background: rgba(255,255,255,.025); }
+    .info-icon { width: 38px; height: 38px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 12px; color: var(--green); background: rgba(185,243,111,.1); }
+    .info-icon svg { width: 19px; height: 19px; }
+    .info-card strong { display: block; font-size: 13px; }
+    .info-card span { display: block; color: var(--muted); font-size: 11px; margin-top: 2px; }
+
+    footer { padding: 27px 0 34px; border-top: 1px solid rgba(255,255,255,.06); color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .footer-inner strong { color: var(--text); }
+
+    .overlay { position: fixed; inset: 0; z-index: 40; visibility: hidden; opacity: 0; background: rgba(0,0,0,.64); transition: .22s ease; }
+    .overlay.open { visibility: visible; opacity: 1; }
+    .cart-panel { position: absolute; top: 0; left: 0; width: min(430px, 100%); height: 100%; display: flex; flex-direction: column; padding: 24px; background: #111713; border-right: 1px solid var(--line); transform: translateX(-100%); transition: .25s ease; }
+    .overlay.open .cart-panel { transform: translateX(0); }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 17px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .panel-header h2 { margin: 0; font-size: 22px; }
+    .close-btn { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; color: var(--text); background: transparent; }
+    .close-btn:hover { color: var(--green); border-color: var(--green); }
+    .close-btn svg { width: 18px; height: 18px; }
+    .cart-items { flex: 1; overflow: auto; padding: 17px 2px; }
+    .cart-row { display: grid; grid-template-columns: 45px 1fr auto; align-items: center; gap: 11px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .cart-row-icon { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 13px; font-size: 23px; background: var(--surface-3); }
+    .cart-row h4 { margin: 0; font-size: 13px; }
+    .cart-row small { display: block; color: var(--muted); font-size: 11px; margin-top: 3px; }
+    .cart-controls { display: flex; align-items: center; gap: 7px; margin-top: 7px; }
+    .qty-btn { width: 23px; height: 23px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 7px; color: var(--green); background: transparent; }
+    .cart-row-total { color: var(--green); font-size: 12px; font-weight: bold; white-space: nowrap; }
+    .cart-empty { display: grid; place-items: center; min-height: 260px; color: var(--muted); text-align: center; }
+    .cart-empty div:first-child { font-size: 42px; margin-bottom: 5px; }
+    .panel-footer { padding-top: 17px; border-top: 1px solid rgba(255,255,255,.08); }
+    .total-line { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .total-line span { color: var(--muted); }
+    .total-line strong { color: var(--green); font-size: 21px; }
+    .full-btn { width: 100%; }
+
+    .modal-wrap { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; visibility: hidden; opacity: 0; background: rgba(0,0,0,.7); transition: .22s ease; }
+    .modal-wrap.open { visibility: visible; opacity: 1; }
+    .modal { width: min(470px, 100%); max-height: 92vh; overflow: auto; padding: 25px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: #111713; box-shadow: var(--shadow); transform: translateY(12px); transition: .22s ease; }
+    .modal-wrap.open .modal { transform: translateY(0); }
+    .modal h2 { margin: 0 0 6px; font-size: 24px; }
+    .modal-intro { color: var(--muted); font-size: 12px; margin: 0 0 20px; }
+    .field { display: grid; gap: 7px; margin-bottom: 14px; }
+    .field label { color: #dce8d8; font-size: 12px; font-weight: bold; }
+    .field input, .field textarea { width: 100%; padding: 12px 13px; outline: none; color: var(--text); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; background: #0d120e; }
+    .field input:focus, .field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(185,243,111,.09); }
+    .field textarea { min-height: 75px; resize: vertical; }
+    .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .modal-actions button { flex: 1; }
+    .notice { display: flex; align-items: flex-start; gap: 9px; padding: 11px 12px; border-radius: 12px; color: var(--muted); background: rgba(185,243,111,.06); font-size: 11px; }
+    .notice svg { width: 16px; min-width: 16px; color: var(--green); margin-top: 1px; }
+    .toast { position: fixed; right: 22px; bottom: 22px; z-index: 80; max-width: min(360px, calc(100% - 44px)); padding: 13px 17px; border: 1px solid var(--line); border-radius: 13px; color: var(--text); background: #18231a; box-shadow: var(--shadow); opacity: 0; transform: translateY(12px); pointer-events: none; transition: .25s ease; font-size: 13px; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 840px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 10px; }
+      .hero { padding-top: 48px; }
+      .hero-visual { min-height: 280px; }
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .info-strip { grid-template-columns: 1fr; }
+      .nav { display: none; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 28px, 1160px); }
+      .topbar-inner { min-height: 70px; }
+      .brand-copy strong { font-size: 15px; }
+      .hero { padding-bottom: 20px; }
+      h1 { font-size: 42px; }
+      .hero p { font-size: 15px; }
+      .hero-actions > * { flex: 1; }
+      .hero-orbit { width: 235px; height: 235px; }
+      .sushi-plate { width: 195px; height: 195px; border-width: 8px; }
+      .sushi-piece { width: 49px; height: 38px; font-size: 21px; }
+      .sushi-piece:nth-child(1) { top: 30px; right: 38px; }
+      .sushi-piece:nth-child(2) { top: 58px; left: 25px; }
+      .sushi-piece:nth-child(3) { bottom: 35px; right: 32px; }
+      .sushi-piece:nth-child(4) { bottom: 41px; left: 43px; }
+      .plate-center { width: 69px; height: 69px; font-size: 30px; }
+      .section { padding-top: 28px; }
+      .section-heading { display: block; }
+      .section-heading h2 { font-size: 25px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .food-card { min-height: 310px; }
+      .footer-inner { display: grid; }
+      .cart-panel { padding: 19px; }
+      .modal { padding: 20px; }
+    }
+  </style>
 </head>
-
 <body>
-<header>
-  <a href="#home" class="logo" style="text-decoration:none;color:white">
-    <span class="logo-icon">Y</span>
-    <span>Yami Yami <span class="green">Sushi</span></span>
-  </a>
-  <button class="cart-button" onclick="goCart()">
-    🛒 السلة <span class="count" id="cartCount">0</span>
-  </button>
-</header>
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <symbol id="i-sushi" viewBox="0 0 24 24"><path fill="currentColor" d="M4 8.4c0-1.3 1-2.4 2.3-2.4h11.4C19 6 20 7.1 20 8.4v7.2c0 1.3-1 2.4-2.3 2.4H6.3C5 18 4 16.9 4 15.6V8.4Z"/><path fill="#0b0f0d" d="M6.6 9.1h10.8v2H6.6zM6.6 13h6.2v2H6.6z"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 1.9-1.4L20 8H6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="20" r="1.4" fill="currentColor"/><circle cx="17" cy="20" r="1.4" fill="currentColor"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 9h.01M18 15h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M19.8 4.4C11 4.4 5.1 7.2 5.1 13c0 3.5 2.5 5.6 5.5 5.6 5.7 0 8.6-6.2 9.2-14.2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 20c2.2-4.4 6-7.2 11.1-9.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 10.5v5M12 7.5h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </svg>
 
-<main>
-  <section class="hero" id="home">
-    <div>
-      <div class="eyebrow">FRESH SUSHI · YAMI YAMI</div>
-      <h1>اكتشف طعمًا مميزًا مع <span class="green">Yami Yami Sushi</span></h1>
-      <p>
-        اكتشف تشكيلتنا من السوشي والماكي والكاليفورنيا والبوكسات.
-        اختر وجباتك، أضفها إلى السلة، وأرسل طلبك مباشرة عبر واتساب.
-      </p>
-      <a href="#menu" class="primary">🍣 اكتشف المنيو</a>
-    </div>
-<img
-  src=IMG_20261018_020933_957.png
-  alt="تشكيلة السوشي من Yami Yami Sushi"
-  style="width:100%;height:300px;object-fit:cover;border-radius:24px;"
->
-  </section>
-
-<section class="poster-menu" id="special-menu">
-  <h2>🍣 اختر وجبتك من المنيو</h2>
-
-  <div class="poster-wrap">
-    <img
-      class="poster-image"
-      src="./ضع-اسم-الصورة-هنا.jpg"
-      alt="منيو Yami Yami Sushi الأصلي"
-    >
-
-    <button class="poster-add" onclick="openBoxPicker()">
-      🛒 اختر وجبتك
-    </button>
-  </div>
-
-  <div id="boxPicker" class="box-picker" hidden>
-    <h3>اختر الوجبة التي تريدها</h3>
-
-    <button onclick="chooseBox(7)">
-      Maki Box · 24 قطعة — 110 DH
-    </button>
-
-    <button onclick="chooseBox(8)">
-      Aromaki Box · 24 قطعة — 160 DH
-    </button>
-
-    <button onclick="chooseBox(9)">
-      Crispy Box · 12 قطعة — 90 DH
-    </button>
-
-    <button onclick="chooseBox(10)">
-      California Box · 16 قطعة — 110 DH
-    </button>
-
-    <button class="close-picker" onclick="closeBoxPicker()">
-      إغلاق ✕
-    </button>
-  </div>
-</section>
-  
-  <section id="menu">
-    <div class="section-title">
-      <h2>🍣 قائمة الطعام</h2>
-      <span class="green">طازج ولذيذ</span>
-    </div>
-    <div class="categories" id="categories"></div>
-    <div class="menu-grid" id="menuGrid"></div>
-    <p class="note">الأسعار والصور المعروضة تجريبية، ويمكنك استبدالها بالمنيو الحقيقي للمطعم.</p>
-  </section>
-
-  <section id="cart">
-    <div class="section-title"><h2>🛒 سلة الطلبات</h2></div>
-    <div class="cart-panel">
-      <div id="cartItems"></div>
-      <div class="total-row">
-        <span>المجموع</span>
-        <span class="green" id="total">0 DH</span>
-      </div>
-      <button class="whatsapp" onclick="sendOrder()">
-        🟢 إرسال الطلب عبر واتساب
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#home" class="brand" aria-label="Yami Yami Sushi">
+        <span class="brand-mark"><svg><use href="#i-sushi" /></svg></span>
+        <span class="brand-copy"><strong>Yami Yami Sushi</strong><span>طازج. لذيذ. ياباني.</span></span>
+      </a>
+      <nav class="nav" aria-label="التنقل الرئيسي">
+        <a href="#home">الرئيسية</a>
+        <a href="#menu">القائمة</a>
+        <a href="#why-us">لماذا نحن؟</a>
+      </nav>
+      <button class="cart-button" id="openCart" type="button" aria-label="فتح السلة">
+        <svg><use href="#i-cart" /></svg><span>السلة</span><span class="cart-count" id="cartCount">0</span>
       </button>
-      <p class="note">
-        لا نطلب اسم الزبون أو عنوانه أو رقم هاتفه في السلة.
-        سيفتح واتساب برسالة الطلب، ويجب الضغط على إرسال داخل واتساب لتأكيده.
-      </p>
     </div>
-  </section>
-</main>
+  </header>
 
-<footer>
-  <strong>Yami Yami Sushi</strong>
-  <p>🍣 شكراً لاختياركم مطعمنا</p>
-</footer>
-
-<nav class="bottom-nav">
-  <a href="#home"><span>⌂</span>الرئيسية</a>
-  <a href="#menu"><span>🍣</span>قائمة الطعام</a>
-  <a href="#cart"><span>🛒</span>السلة</a>
-</nav>
-
-<script>
-"use strict";
-
-/*
-  غيّر الأسعار والأسماء والصور هنا لتطابق المنيو الحقيقي.
-  كل وجبة لها صورتها الخاصة ورابط لعرض صورة المنيو عند توفره.
-*/
-const WHATSAPP_NUMBER = "212688741156";
-
-const menu = [
-  {
-    id: 1, name: "Salmon Sushi", category: "Sushi",
-    price: 45,
-    description: "سوشي السلمون",
-    image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=700&q=80",
-    menuImage: ""
-  },
-  {
-    id: 2, name: "California Rolls", category: "California",
-    price: 55,
-    description: "كاليفورنيا رول",
-    image: "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=700&q=80",
-    menuImage: ""
-  },
-  {
-    id: 3, name: "Maki Rolls", category: "Maki",
-    price: 40,
-    description: "ماكي سوشي",
-    image: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=700&q=80",
-    menuImage: ""
-  },
-  {
-    id: 4, name: "Sushi Mix Box", category: "Boxes",
-    price: 95,
-    description: "تشكيلة متنوعة من السوشي",
-    image: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=700&q=80",
-    menuImage: ""
-  },
-  {
-    id: 5, name: "Salmon Maki", category: "Maki",
-    price: 50,
-    description: "ماكي بالسلمون",
-    image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=700&q=80",
-    menuImage: ""
-  },
-  {
-    id: 6, name: "Sushi Special", category: "Sushi",
-    price: 75,
-    description: "تشكيلة سوشي خاصة",
-    image: "https://images.unsplash.com/photo-1563612116625-3012372fccce?auto=format&fit=crop&w=700&q=80",
-    menuImage: ""
-  }{
-  id: 7,
-  name: "Maki Box 24pcs",
-  category: "Boxes",
-  price: 110,
-  description: "Maki concombre, avocat, crevette, saumon",
-  image: Screenshot_20261018-024003.png
-  menuImage: ""
-},
-{
-  id: 8,
-  name: "Aromaki Box 24pcs",
-  category: "Boxes",
-  price: 160,
-  description: "Aromaki saumon, crevette, végétarien, poulet",
-  image:Screenshot_20261018-024003.png
-  menuImage: ""
-},
-{
-  id: 9,
-  name: "Crispy Box 12pcs",
-  category: "Boxes",
-  price: 90,
-  description: "Fry eby fry, Aromaki bowlé, Crunchy",
-  image: Screenshot_20261018-024003.png
-  menuImage: ""
-},
-{
-  id: 10,
-  name: "California Box 16pcs",
-  category: "Boxes",
-  price: 110,
-  description: "California cheese, Classique, Tigre roll, Poulet roll",
-  image: Screenshot_20261018-024003.png
-  menuImage: ""
-  },
-];
-
-let cart = [];
-let activeCategory = "Tous";
-
-const categories = [
-  { key: "Tous", label: "الكل" },
-  { key: "Sushi", label: "🍣 سوشي" },
-  { key: "Maki", label: "ماكي" },
-  { key: "California", label: "كاليفورنيا" },
-  { key: "Boxes", label: "📦 بوكسات" }
-];
-
-function renderCategories() {
-  document.getElementById("categories").innerHTML =
-    categories.map(c => `
-      <button class="category ${activeCategory === c.key ? "active" : ""}"
-        onclick="setCategory('${c.key}')">${c.label}</button>
-    `).join("");
-}
-
-function setCategory(category) {
-  activeCategory = category;
-  renderCategories();
-  renderMenu();
-}
-
-function renderMenu() {
-  const items = menu.filter(item =>
-    activeCategory === "Tous" || item.category === activeCategory
-  );
-
-  document.getElementById("menuGrid").innerHTML = items.map(item => `
-    <article class="food-card">
-      <img src="${item.image}" alt="${item.name}" loading="lazy"
-        onerror="this.onerror=null;this.src='https://placehold.co/600x400/141a16/20df70?text=Sushi'">
-      <div class="food-info">
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
-        <div class="food-bottom">
-          <span class="price">${item.price} DH</span>
-          <button class="add" onclick="addToCart(${item.id})">＋ أضف</button>
-        </div>
-        ${item.menuImage ? `
-          <a class="menu-link" href="${item.menuImage}" target="_blank" rel="noopener">
-            📖 عرض صورة المنيو
-          </a>` : ""}
-      </div>
-    </article>
-  `).join("");
-}
-
-function addToCart(id) {
-  const item = menu.find(m => m.id === id);
-  if (!item) return;
-
-  const existing = cart.find(c => c.id === id);
-  if (existing) existing.qty++;
-  else cart.push({ ...item, qty: 1 });
-
-  renderCart();
-}
-
-function changeQty(id, amount) {
-  const item = cart.find(c => c.id === id);
-  if (!item) return;
-  item.qty += amount;
-  if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
-  renderCart();
-}
-
-function removeItem(id) {
-  cart = cart.filter(c => c.id !== id);
-  renderCart();
-}
-
-function renderCart() {
-  const count = cart.reduce((sum, item) => sum + item.qty, 0);
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-  document.getElementById("cartCount").textContent = count;
-  document.getElementById("total").textContent = total + " DH";
-
-  const container = document.getElementById("cartItems");
-
-  if (cart.length === 0) {
-    container.innerHTML = '<p class="empty">سلتك فارغة. اختر وجباتك من القائمة 🍣</p>';
-    return;
-  }
-
-  container.innerHTML = cart.map(item => `
-    <div class="cart-row">
-      <img src="${item.image}" alt="${item.name}">
-      <div class="cart-description">
-        <strong>${item.name}</strong>
-        <span class="price">${item.price * item.qty} DH</span>
-        <div class="qty" style="margin-top:8px">
-          <button onclick="changeQty(${item.id},-1)">−</button>
-          <span>${item.qty}</span>
-          <button onclick="changeQty(${item.id},1)">＋</button>
-        </div>
-        <button class="remove" onclick="removeItem(${item.id})">حذف الوجبة</button>
-      </div>
-    </div>
-  `).join("");
-}
-
-function goCart() {
-  document.getElementById("cart").scrollIntoView({ behavior: "smooth" });
-}
-
-function sendOrder() {
-  if (cart.length === 0) {
-    alert("السلة فارغة! أضف وجبة واحدة على الأقل.");
-    return;
-  }
-
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  let message = "🍣 *طلب جديد - Yami Yami Sushi*%0A%0A";
-
-  cart.forEach(item => {
-    message += "• " + item.name +
-      " × " + item.qty +
-      " = " + (item.price * item.qty) + " DH%0A";
-  });
-
-  message += "%0A*المجموع: " + total + " DH*";
-  const url = "https://wa.me/" + WHATSAPP_NUMBER +
-    "?text=" + encodeURIComponent(
-      message.replaceAll("%0A", "\n")
-    );
-
-  window.location.href = url;
-}
-
-function openBoxPicker() {
-  document.getElementById("boxPicker").hidden = false;
-  document.getElementById("boxPicker").scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
-}
-
-function closeBoxPicker() {
-  document.getElementById("boxPicker").hidden = true;
-}
-
-function chooseBox(id) {
-  addToCart(id);
-  closeBoxPicker();
-  goCart();
-  }
-  
-renderCategories();
-renderMenu();
-renderCart();
-</script>
-</body>
-  </html>
-  
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow"><i></i> نكهة يابانية تصل إلى بابك</span>
+          <h1>لحظتك اللذيذة تبدأ من <span>Yami Yami</span></h1>
+          <p>اختَر وجبتك المفضلة، أضفها إلى السلة، وأرسل طلبك بسهولة. سوشي طازج ومذاق لا يُنسى.</p>
+          <div class="hero-actions">
+            <a class="prim
