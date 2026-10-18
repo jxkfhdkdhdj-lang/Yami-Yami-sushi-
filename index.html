@@ -1,0 +1,550 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b09">
+<title>Yami Yami Sushi | يامي يامي سوشي</title>
+
+<style>
+:root {
+  --green: #20df70;
+  --black: #080b09;
+  --panel: #141a16;
+  --muted: #aab4ad;
+  --border: #29352e;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--black);
+  color: #f5f7f5;
+  font-family: Arial, Tahoma, sans-serif;
+}
+button { font: inherit; cursor: pointer; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 5%;
+  background: rgba(8,11,9,.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 23px;
+  font-weight: 900;
+}
+.logo-icon {
+  background: var(--green);
+  color: #071009;
+  border-radius: 13px;
+  padding: 8px 12px;
+}
+.green { color: var(--green); }
+.cart-button {
+  background: var(--panel);
+  color: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 11px 15px;
+}
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green);
+  color: #071009;
+  font-weight: bold;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 20px;
+  margin-right: 6px;
+}
+.hero {
+  padding: 45px 5% 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: center;
+}
+.eyebrow {
+  color: var(--green);
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+h1 { font-size: clamp(32px, 5vw, 54px); margin: 15px 0; }
+.hero p { color: var(--muted); line-height: 1.9; font-size: 17px; }
+.hero img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+}
+.primary {
+  display: inline-block;
+  background: var(--green);
+  color: #071009;
+  border: 0;
+  border-radius: 13px;
+  padding: 14px 20px;
+  font-weight: 800;
+  text-decoration: none;
+}
+section { padding: 25px 5%; }
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.section-title h2 { margin: 0 0 18px; }
+.categories {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0 18px;
+}
+.category {
+  white-space: nowrap;
+  padding: 10px 16px;
+  color: white;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+}
+.category.active {
+  color: #071009;
+  background: var(--green);
+  border-color: var(--green);
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+.food-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 19px;
+  overflow: hidden;
+  min-width: 0;
+}
+.food-card img {
+  display: block;
+  width: 100%;
+  height: 175px;
+  object-fit: cover;
+  background: #202820;
+}
+.food-info { padding: 13px; }
+.food-info h3 { margin: 0 0 8px; font-size: 17px; }
+.food-info p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  min-height: 38px;
+  margin: 0 0 10px;
+}
+.food-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.price { color: var(--green); font-weight: 900; white-space: nowrap; }
+.add {
+  border: 0;
+  background: var(--green);
+  color: #071009;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: bold;
+}
+.menu-link {
+  display: block;
+  color: var(--green);
+  font-size: 12px;
+  margin-top: 10px;
+  text-decoration: underline;
+}
+#cart {
+  scroll-margin-top: 85px;
+  padding-bottom: 100px;
+}
+.cart-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 17px;
+}
+.cart-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-row img {
+  width: 66px;
+  height: 66px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+.cart-description { flex: 1; min-width: 0; }
+.cart-description strong { display: block; margin-bottom: 7px; }
+.qty { display: flex; align-items: center; gap: 10px; }
+.qty button {
+  width: 29px;
+  height: 29px;
+  background: #26342b;
+  color: var(--green);
+  border: 0;
+  border-radius: 8px;
+}
+.remove {
+  color: #ff8585;
+  background: none;
+  border: 0;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+.whatsapp {
+  display: block;
+  width: 100%;
+  background: #25d366;
+  color: #06220f;
+  font-size: 17px;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 12px;
+  border: 0;
+}
+.note { color: var(--muted); font-size: 12px; line-height: 1.7; }
+.empty { color: var(--muted); padding: 20px 0; }
+footer {
+  padding: 25px;
+  text-align: center;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-around;
+  background: #101511;
+  border-top: 1px solid var(--border);
+  padding: 10px 5px calc(10px + env(safe-area-inset-bottom));
+}
+.bottom-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  text-align: center;
+  font-size: 12px;
+  display: grid;
+  gap: 4px;
+}
+.bottom-nav span { font-size: 22px; }
+.bottom-nav a:hover { color: var(--green); }
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; padding-top: 28px; }
+  .hero img { height: 230px; }
+  .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+  .food-card img { height: 135px; }
+  .food-info { padding: 10px; }
+  .food-info h3 { font-size: 15px; }
+  .food-info p { font-size: 12px; }
+  .add { padding: 9px; font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .menu-grid { grid-template-columns: 1fr; }
+  .food-card img { height: 200px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <a href="#home" class="logo" style="text-decoration:none;color:white">
+    <span class="logo-icon">Y</span>
+    <span>Yami Yami <span class="green">Sushi</span></span>
+  </a>
+  <button class="cart-button" onclick="goCart()">
+    🛒 السلة <span class="count" id="cartCount">0</span>
+  </button>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div>
+      <div class="eyebrow">FRESH SUSHI · YAMI YAMI</div>
+      <h1>اكتشف طعمًا مميزًا مع <span class="green">Yami Yami Sushi</span></h1>
+      <p>
+        اكتشف تشكيلتنا من السوشي والماكي والكاليفورنيا والبوكسات.
+        اختر وجباتك، أضفها إلى السلة، وأرسل طلبك مباشرة عبر واتساب.
+      </p>
+      <a href="#menu" class="primary">🍣 اكتشف المنيو</a>
+    </div>
+    <img
+      src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1000&q=85"
+      alt="تشكيلة سوشي"
+    >
+  </section>
+
+  <section id="menu">
+    <div class="section-title">
+      <h2>🍣 قائمة الطعام</h2>
+      <span class="green">طازج ولذيذ</span>
+    </div>
+    <div class="categories" id="categories"></div>
+    <div class="menu-grid" id="menuGrid"></div>
+    <p class="note">الأسعار والصور المعروضة تجريبية، ويمكنك استبدالها بالمنيو الحقيقي للمطعم.</p>
+  </section>
+
+  <section id="cart">
+    <div class="section-title"><h2>🛒 سلة الطلبات</h2></div>
+    <div class="cart-panel">
+      <div id="cartItems"></div>
+      <div class="total-row">
+        <span>المجموع</span>
+        <span class="green" id="total">0 DH</span>
+      </div>
+      <button class="whatsapp" onclick="sendOrder()">
+        🟢 إرسال الطلب عبر واتساب
+      </button>
+      <p class="note">
+        لا نطلب اسم الزبون أو عنوانه أو رقم هاتفه في السلة.
+        سيفتح واتساب برسالة الطلب، ويجب الضغط على إرسال داخل واتساب لتأكيده.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>Yami Yami Sushi</strong>
+  <p>🍣 شكراً لاختياركم مطعمنا</p>
+</footer>
+
+<nav class="bottom-nav">
+  <a href="#home"><span>⌂</span>الرئيسية</a>
+  <a href="#menu"><span>🍣</span>قائمة الطعام</a>
+  <a href="#cart"><span>🛒</span>السلة</a>
+</nav>
+
+<script>
+"use strict";
+
+/*
+  غيّر الأسعار والأسماء والصور هنا لتطابق المنيو الحقيقي.
+  كل وجبة لها صورتها الخاصة ورابط لعرض صورة المنيو عند توفره.
+*/
+const WHATSAPP_NUMBER = "212688741256";
+
+const menu = [
+  {
+    id: 1, name: "Salmon Sushi", category: "Sushi",
+    price: 45,
+    description: "سوشي السلمون",
+    image: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=700&q=80",
+    menuImage: ""
+  },
+  {
+    id: 2, name: "California Rolls", category: "California",
+    price: 55,
+    description: "كاليفورنيا رول",
+    image: "https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=700&q=80",
+    menuImage: ""
+  },
+  {
+    id: 3, name: "Maki Rolls", category: "Maki",
+    price: 40,
+    description: "ماكي سوشي",
+    image: "https://images.unsplash.com/photo-1611143669185-af224c5e3252?auto=format&fit=crop&w=700&q=80",
+    menuImage: ""
+  },
+  {
+    id: 4, name: "Sushi Mix Box", category: "Boxes",
+    price: 95,
+    description: "تشكيلة متنوعة من السوشي",
+    image: "https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=700&q=80",
+    menuImage: ""
+  },
+  {
+    id: 5, name: "Salmon Maki", category: "Maki",
+    price: 50,
+    description: "ماكي بالسلمون",
+    image: "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=700&q=80",
+    menuImage: ""
+  },
+  {
+    id: 6, name: "Sushi Special", category: "Sushi",
+    price: 75,
+    description: "تشكيلة سوشي خاصة",
+    image: "https://images.unsplash.com/photo-1563612116625-3012372fccce?auto=format&fit=crop&w=700&q=80",
+    menuImage: ""
+  }
+];
+
+let cart = [];
+let activeCategory = "Tous";
+
+const categories = [
+  { key: "Tous", label: "الكل" },
+  { key: "Sushi", label: "🍣 سوشي" },
+  { key: "Maki", label: "ماكي" },
+  { key: "California", label: "كاليفورنيا" },
+  { key: "Boxes", label: "📦 بوكسات" }
+];
+
+function renderCategories() {
+  document.getElementById("categories").innerHTML =
+    categories.map(c => `
+      <button class="category ${activeCategory === c.key ? "active" : ""}"
+        onclick="setCategory('${c.key}')">${c.label}</button>
+    `).join("");
+}
+
+function setCategory(category) {
+  activeCategory = category;
+  renderCategories();
+  renderMenu();
+}
+
+function renderMenu() {
+  const items = menu.filter(item =>
+    activeCategory === "Tous" || item.category === activeCategory
+  );
+
+  document.getElementById("menuGrid").innerHTML = items.map(item => `
+    <article class="food-card">
+      <img src="${item.image}" alt="${item.name}" loading="lazy"
+        onerror="this.onerror=null;this.src='https://placehold.co/600x400/141a16/20df70?text=Sushi'">
+      <div class="food-info">
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+        <div class="food-bottom">
+          <span class="price">${item.price} DH</span>
+          <button class="add" onclick="addToCart(${item.id})">＋ أضف</button>
+        </div>
+        ${item.menuImage ? `
+          <a class="menu-link" href="${item.menuImage}" target="_blank" rel="noopener">
+            📖 عرض صورة المنيو
+          </a>` : ""}
+      </div>
+    </article>
+  `).join("");
+}
+
+function addToCart(id) {
+  const item = menu.find(m => m.id === id);
+  if (!item) return;
+
+  const existing = cart.find(c => c.id === id);
+  if (existing) existing.qty++;
+  else cart.push({ ...item, qty: 1 });
+
+  renderCart();
+}
+
+function changeQty(id, amount) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty += amount;
+  if (item.qty <= 0) cart = cart.filter(c => c.id !== id);
+  renderCart();
+}
+
+function removeItem(id) {
+  cart = cart.filter(c => c.id !== id);
+  renderCart();
+}
+
+function renderCart() {
+  const count = cart.reduce((sum, item) => sum + item.qty, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  document.getElementById("cartCount").textContent = count;
+  document.getElementById("total").textContent = total + " DH";
+
+  const container = document.getElementById("cartItems");
+
+  if (cart.length === 0) {
+    container.innerHTML = '<p class="empty">سلتك فارغة. اختر وجباتك من القائمة 🍣</p>';
+    return;
+  }
+
+  container.innerHTML = cart.map(item => `
+    <div class="cart-row">
+      <img src="${item.image}" alt="${item.name}">
+      <div class="cart-description">
+        <strong>${item.name}</strong>
+        <span class="price">${item.price * item.qty} DH</span>
+        <div class="qty" style="margin-top:8px">
+          <button onclick="changeQty(${item.id},-1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${item.id},1)">＋</button>
+        </div>
+        <button class="remove" onclick="removeItem(${item.id})">حذف الوجبة</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function goCart() {
+  document.getElementById("cart").scrollIntoView({ behavior: "smooth" });
+}
+
+function sendOrder() {
+  if (cart.length === 0) {
+    alert("السلة فارغة! أضف وجبة واحدة على الأقل.");
+    return;
+  }
+
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  let message = "🍣 *طلب جديد - Yami Yami Sushi*%0A%0A";
+
+  cart.forEach(item => {
+    message += "• " + item.name +
+      " × " + item.qty +
+      " = " + (item.price * item.qty) + " DH%0A";
+  });
+
+  message += "%0A*المجموع: " + total + " DH*";
+  const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    "?text=" + encodeURIComponent(
+      message.replaceAll("%0A", "\n")
+    );
+
+  window.location.href = url;
+}
+
+renderCategories();
+renderMenu();
+renderCart();
+</script>
+</body>
+  </html>
+  
