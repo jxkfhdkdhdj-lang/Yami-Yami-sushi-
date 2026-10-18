@@ -280,6 +280,73 @@ footer {
   .product img { height:190px; }
   .categories { max-width:600px; }
 }
+/* تصميم بطاقات Maki */
+.maki-banner {
+  padding: 18px 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 12px;
+  min-height: 220px;
+  background: linear-gradient(135deg,#061008,#102b14);
+  border-bottom: 2px solid #19e957;
+}
+.maki-banner h1 {
+  color: #39ff70;
+  font-size: 38px;
+  margin: 0 0 10px;
+  font-style: italic;
+}
+.maki-banner p {
+  color: white;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+.maki-banner img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 18px;
+}
+#products.maki-products {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px;
+  padding: 12px;
+}
+.maki-products .product {
+  border: 2px solid #20d950;
+  border-radius: 14px;
+  padding: 6px 6px 10px;
+  box-shadow: 0 0 8px #0a3b19;
+}
+.maki-products .product img {
+  height: auto;
+  aspect-ratio: 1.25/1;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.maki-products .product h3 {
+  font-size: 14px;
+}
+.maki-products .ingredients {
+  min-height: 30px;
+  font-size: 12px;
+}
+.maki-products .quantity {
+  gap: 10px;
+}
+.maki-products .add-btn {
+  background: #39ff70;
+  border-radius: 25px;
+  padding: 11px 3px;
+}
+@media(min-width:650px) {
+  #products.maki-products {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+}
+  
 </style>
 </head>
 
@@ -335,6 +402,17 @@ footer {
     ← العودة للرئيسية
   </button>
   <h2 id="menu-title" class="section-title">Makis</h2>
+  
+<div id="maki-banner" class="maki-banner" style="display:none">
+  <div>
+    <h1>Maki</h1>
+    <p>اكتشف أشهر أنواع الماكي<br>بطعم ياباني أصيل</p>
+  </div>
+  <img
+    src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=600&q=85"
+    alt="Maki Sushi">
+</div>
+  
   <p id="menu-subtitle" class="subtitle"></p>
   <div id="products" class="products"></div>
 </section>
@@ -434,8 +512,20 @@ function openCategory(category) {
       ? "اكتشف جميع أنواع الماكي وأسعارها"
       : "اكتشف جميع أنواع الفوتوماكي ومكوناتها";
 
-  const container = document.getElementById("products");
-  container.innerHTML = "";
+  
+const container = document.getElementById("products");
+
+container.classList.toggle(
+  "maki-products",
+  category === "maki"
+);
+
+const banner = document.getElementById("maki-banner");
+banner.style.display =
+  category === "maki" ? "grid" : "none";
+
+container.innerHTML = "";
+  
 
   items.forEach((item, index) => {
     const id = category + "-" + index;
