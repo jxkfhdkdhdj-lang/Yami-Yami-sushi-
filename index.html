@@ -310,9 +310,10 @@ footer {
   border-radius: 18px;
 }
 #products.maki-products {
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 10px;
-  padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    padding: 12px;
 }
 .maki-products .product {
   border: 2px solid #20d950;
@@ -321,10 +322,10 @@ footer {
   box-shadow: 0 0 8px #0a3b19;
 }
 .maki-products .product img {
-  height: auto;
-  aspect-ratio: 1.25/1;
-  object-fit: cover;
-  border-radius: 8px;
+    width: 100%;
+    height: 75px;
+    aspect-ratio: auto;
+    object-fit: cover;
 }
 .maki-products .product h3 {
   font-size: 14px;
